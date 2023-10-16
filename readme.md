@@ -1,4 +1,3 @@
-# App Uptime Tracker 📚⏰
 <p align="center">
     <a href="#"><img src="pictures/header.jpg" alt="Logo" width=80%/></a>
 <p>

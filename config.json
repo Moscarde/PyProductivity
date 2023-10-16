@@ -6,7 +6,7 @@
     "Console Log": "1 = True | 0 = False",
 
 
-    "tick_seconds": 30,
+    "tick_seconds": 9,
     "output_file": "txt",
     "max_inactive_time": 600,
     "console_log": 1

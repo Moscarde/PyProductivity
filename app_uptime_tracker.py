@@ -7,9 +7,11 @@ import pyautogui
 import pygetwindow as gw
 from icecream import ic
 
-tick_seconds = 9  # max 9
-inactive_time = 0
+# load from config.json
+tick_seconds = 9  
 max_inactive_time = 600
+
+inactive_time = 0
 previous_mouse_pos = [0, 0]
 
 line_separator = "  <~~>  "
@@ -24,14 +26,31 @@ base_data = """<~~~~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Sum ~~~~~~~~~~~~~~~~~~~
 
 def load_configs():
     global tick_seconds, max_inactive_time
-    with open("config.json") as f:
-        config = json.load(f)
 
-    tick_seconds = int(config["tick_seconds"])
-    max_inactive_time = int(config["max_inactive_time"])
+    try:
+        with open("config.json") as f:
+            config = json.load(f)
 
-    if int(config["console_log"]) == 0:
-        ic.disable()
+        tick_seconds = int(config["tick_seconds"])
+        max_inactive_time = int(config["max_inactive_time"])
+
+        if int(config["console_log"]) == 0:
+            ic.disable()
+
+    except FileNotFoundError as e:
+        print(f'config.json not found!\n{e}')
+        print('Loading default configs...')
+    except KeyError as e:
+        print(f"Error in config.json key!\n{e}")
+        print('Loading default configs...')
+    except Exception as e:
+        print(e)
+        print('Loading default configs...')
+    
+        
+    #FileNotFoundError
+    #KeyError
+
 
 
 def is_active():

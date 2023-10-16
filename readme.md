@@ -1,5 +1,7 @@
 # App Uptime Tracker 📚⏰
-
+<p align="center">
+    <a href="#"><img src="pictures/header.jpg" alt="Logo" width=80%/></a>
+<p>
 The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports.
 
 ## Features 🌟

@@ -33,22 +33,24 @@ pip install pyautogui pygetwindow icecream
 
 4. The script will start monitoring your active windows and recording their uptime.
 
-5. You can stop the script at any time by pressing Ctrl + C in the terminal.
+5. You can stop the script at any time by pressing Ctrl + C in the terminal or closing it.
 
 6. Daily usage reports are automatically generated and saved as text files with the format "YYYY-MM-DD.txt" in the same directory as the script.
 
 ## Example Output 📊
 
-Here is an example of the generated usage report file (e.g., "2023-10-15.txt"):
-
 ```txt
 
 <~~~~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Sum ~~~~~~~~~~~~~~~~~~~~~~~~~~>
-00:22:39  <~~>  Visual Studio Code
+00:02:33  <~~>  Visual Studio Code
+00:01:03  <~~>  Mozilla Firefox
 
 <~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Specific ~~~~~~~~~~~~~~~~~~~~~~~~>
-00:22:14  <~~>  main.py - PyWindows - Visual Studio Code
-00:00:25  <~~>  2023-10-15.txt - PyWindows - Visual Studio Code
+00:00:45  <~~>  app_uptime_tracker.py - PyWindows - Visual Studio Code
+00:00:09  <~~>  AppUptimeTracker/2023-10-14.txt at main · Moscarde/AppUptimeTracker — Mozilla Firefox
+00:00:54  <~~>  Moscarde/AppUptimeTracker: Application uptime tracker that monitors active windows, automatically generating daily usage reports. — Mozilla Firefox
+00:01:21  <~~>  readme.md - PyWindows - Visual Studio Code
+00:00:27  <~~>  2023-10-15.txt - PyWindows - Visual Studio Code
 
 ```
 

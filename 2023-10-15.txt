@@ -1,9 +1,9 @@
 <~~~~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Sum ~~~~~~~~~~~~~~~~~~~~~~~~~~>
-00:05:42  <~~>  Visual Studio Code
+00:06:18  <~~>  Visual Studio Code
 00:01:03  <~~>  Mozilla Firefox
 
 <~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Specific ~~~~~~~~~~~~~~~~~~~~~~~~>
-00:01:57  <~~>  app_uptime_tracker.py - PyWindows - Visual Studio Code
+00:02:33  <~~>  app_uptime_tracker.py - PyWindows - Visual Studio Code
 00:00:09  <~~>  AppUptimeTracker/2023-10-14.txt at main · Moscarde/AppUptimeTracker — Mozilla Firefox
 00:00:54  <~~>  Moscarde/AppUptimeTracker: Application uptime tracker that monitors active windows, automatically generating daily usage reports. — Mozilla Firefox
 00:01:57  <~~>  readme.md - PyWindows - Visual Studio Code

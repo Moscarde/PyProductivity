@@ -1,10 +1,11 @@
+import json
 import os
 import time
 from datetime import datetime, timedelta
 
 import pyautogui
 import pygetwindow as gw
-# from icecream import ic
+from icecream import ic
 
 tick_seconds = 9  # max 9
 inactive_time = 0
@@ -21,13 +22,25 @@ base_data = """<~~~~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Sum ~~~~~~~~~~~~~~~~~~~
 """
 
 
+def load_configs():
+    global tick_seconds, max_inactive_time
+    with open("config.json") as f:
+        config = json.load(f)
+
+    tick_seconds = int(config["tick_seconds"])
+    max_inactive_time = int(config["max_inactive_time"])
+
+    if int(config["console_log"]) == 0:
+        ic.disable()
+
+
 def is_active():
     global previous_mouse_pos, inactive_time
     mouse_pos = list(pyautogui.position())
 
     if mouse_pos == previous_mouse_pos:
         if inactive_time > max_inactive_time:
-            print("inative")
+            ic(inactive_time)
             return False
         else:
             inactive_time += tick_seconds
@@ -86,7 +99,7 @@ def get_processed_data(window_title, data):
 
     if old_line == None:
         # Insere uma nova linha caso nao encontre
-        new_line = f"00:00:0{tick_seconds}  <~~>  {window_title}"
+        new_line = f"00:00:00  <~~>  {window_title}"
         data.insert(-1, new_line)
     else:
         # Substitui uma linha
@@ -95,10 +108,12 @@ def get_processed_data(window_title, data):
 
     return data
 
+
 def get_app_name(window_title):
     window_app_name = window_title.split(" - ")[-1]
-    window_app_name = window_app_name.split(' — ')[-1]
+    window_app_name = window_app_name.split(" — ")[-1]
     return window_app_name
+
 
 def process_report(window_title, full_data):
     # spliting datas
@@ -119,9 +134,6 @@ def process_report(window_title, full_data):
 def report(window):
     todays_date = datetime.now().strftime("%Y-%m-%d")
     data = read_data(todays_date)
-    
-    # console log
-    # ic("report", window)
 
     data = process_report(window, data)
 
@@ -130,12 +142,13 @@ def report(window):
 
 
 def main():
-    repeat = True
-    while repeat:
+    load_configs()
 
+    while True:
         if is_active():
             active_window = gw.getActiveWindowTitle()
             if active_window != None:
+                ic("report", active_window) # console_log
                 report(active_window)
 
         time.sleep(tick_seconds)

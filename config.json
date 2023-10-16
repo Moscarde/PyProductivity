@@ -1,0 +1,13 @@
+{
+    
+    "Tick Seconds": "1 to 60",
+    "Output File": "txt | csv | json",
+    "Max Inactive Time": "time in seconds",
+    "Console Log": "1 = True | 0 = False",
+
+
+    "tick_seconds": 30,
+    "output_file": "txt",
+    "max_inactive_time": 600,
+    "console_log": 1
+}

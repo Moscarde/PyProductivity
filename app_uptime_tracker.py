@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 import pyautogui
 import pygetwindow as gw
-from icecream import ic
+# from icecream import ic
 
 tick_seconds = 9  # max 9
 inactive_time = 0
@@ -95,17 +95,21 @@ def get_processed_data(window_title, data):
 
     return data
 
+def get_app_name(window_title):
+    window_app_name = window_title.split(" - ")[-1]
+    window_app_name = window_app_name.split(' — ')[-1]
+    return window_app_name
 
-def process_report(window, full_data):
+def process_report(window_title, full_data):
     # spliting datas
     separator_index = full_data.index(data_separator)
     data_stats = full_data[:separator_index]
     data_logs = full_data[separator_index:]
 
     # processing data
-    data_logs = get_processed_data(window, data_logs)
-    window_app = window.split(" - ")[-1]
-    data_stats = get_processed_data(window_app, data_stats)
+    data_logs = get_processed_data(window_title, data_logs)
+    window_app_name = get_app_name(window_title)
+    data_stats = get_processed_data(window_app_name, data_stats)
 
     full_data = data_stats + data_logs
 
@@ -117,7 +121,8 @@ def report(window):
     data = read_data(todays_date)
     
     # console log
-    ic("report", window)
+    # ic("report", window)
+
     data = process_report(window, data)
 
     data_string = "\n".join(str(line) for line in data)

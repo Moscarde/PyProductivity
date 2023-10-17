@@ -8,8 +8,9 @@ import pygetwindow as gw
 from icecream import ic
 
 # load from config.json
-tick_seconds = 9  
+tick_seconds = 9
 max_inactive_time = 600
+console_log = 1
 
 inactive_time = 0
 previous_mouse_pos = [0, 0]
@@ -25,32 +26,31 @@ base_data = """<~~~~~~~~~~~~~~~~~~~~~~~~~~~ Usage time - Sum ~~~~~~~~~~~~~~~~~~~
 
 
 def load_configs():
-    global tick_seconds, max_inactive_time
+    print('Loading configs...')
+    global tick_seconds, max_inactive_time, console_log
 
     try:
         with open("config.json") as f:
             config = json.load(f)
 
         tick_seconds = int(config["tick_seconds"])
+        ic(tick_seconds)
         max_inactive_time = int(config["max_inactive_time"])
+        ic(max_inactive_time)
 
         if int(config["console_log"]) == 0:
             ic.disable()
+        ic(console_log)
 
     except FileNotFoundError as e:
-        print(f'config.json not found!\n{e}')
-        print('Loading default configs...')
+        print(f"config.json not found!\n{e}")
+        print("Loading default configs...")
     except KeyError as e:
         print(f"Error in config.json key!\n{e}")
-        print('Loading default configs...')
+        print("Loading default configs...")
     except Exception as e:
         print(e)
-        print('Loading default configs...')
-    
-        
-    #FileNotFoundError
-    #KeyError
-
+        print("Loading default configs...")
 
 
 def is_active():
@@ -59,6 +59,7 @@ def is_active():
 
     if mouse_pos == previous_mouse_pos:
         if inactive_time > max_inactive_time:
+            inactive_time += tick_seconds
             ic(inactive_time)
             return False
         else:
@@ -163,11 +164,12 @@ def report(window):
 def main():
     load_configs()
 
+    print('Starting Tracker -  Press Ctrl + C or close this window to stop tracking!')
     while True:
         if is_active():
             active_window = gw.getActiveWindowTitle()
-            if active_window != None:
-                ic("report", active_window) # console_log
+            if active_window != None and active_window != "":
+                ic("report", active_window)  # console_log
                 report(active_window)
 
         time.sleep(tick_seconds)

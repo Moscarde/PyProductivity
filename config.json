@@ -1,13 +1,10 @@
 {
-    
-    "Tick Seconds": "1 to 60",
-    "Output File": "txt | csv | json",
-    "Max Inactive Time": "time in seconds",
-    "Console Log": "1 = True | 0 = False",
+    "tick_seconds": 1,
+    "____tick_econds____": "int ~ 1 to 60",
 
-
-    "tick_seconds": 9,
-    "output_file": "txt",
     "max_inactive_time": 600,
-    "console_log": 1
+    "____max_inactive_time____": "int ~ max time without mouse position change",
+
+    "console_log": 1,
+    "____console_log____": "More detailed console stats ~ 1 = True, 0 = False"
 }

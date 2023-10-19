@@ -3,6 +3,11 @@
 <p>
 The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports.
 
+## Planned Features
+- [x] Read data in csv
+- [ ] Write data in csv
+- [ ] Manipulate data with pandas
+
 ## Features 🌟
 
 - Monitor and record the uptime of active windows.

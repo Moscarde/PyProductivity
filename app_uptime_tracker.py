@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import pyautogui
 import pygetwindow as gw
 from icecream import ic
+import pandas as pd
 
 # load from config.json
 tick_seconds = 9
@@ -72,18 +73,19 @@ def is_active():
 
 
 def read_data(date):
-    if not os.path.exists(f"{date}.txt"):
-        file = open(f"{date}.txt", "w")
-        file.write(base_data)
-        data = base_data.split("\n")
+    if not os.path.exists(f"{date}.csv"):
+        file = open(f"{date}.csv", "w")
         file.close()
-        return data
-
+        # retornar data
+        return ''
+    
     else:
-        file = open(f"{date}.txt", "r", encoding="UTF-8")
-        data = file.read().split("\n")
-        file.close()
-        return data
+        try:
+            df = pd.read_csv(f'{date}.csv')
+            return df
+        except:
+            return "Sem daata"
+            
 
 
 def write_data(date, data):
@@ -176,4 +178,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    todays_date = datetime.now().strftime("%Y-%m-%d")
+    print(read_data(todays_date))

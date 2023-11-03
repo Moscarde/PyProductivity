@@ -10,19 +10,11 @@ from icecream import ic
 import pandas as pd
 
 # new config
-loop_interval = 0.5
-write_data_interval = 5
-
-# load from config.json
-
-
-
-
-
+loop_interval = 0.1
+write_data_interval = 3
 
 
 def main():
-    # load_configs()
     print("Starting Tracker -  Press Ctrl + C or close this window to stop tracking!")
     while True:
         try:
@@ -41,9 +33,11 @@ def main():
         except Exception as e:
             print(e)
 
-max_inactive_time = 15
+
+max_inactive_time = 600
 inactive_time = 0
 previous_mouse_pos = [0, 0]
+
 
 def user_is_active():
     global previous_mouse_pos, inactive_time
@@ -51,10 +45,10 @@ def user_is_active():
 
     if mouse_pos == previous_mouse_pos:
         if inactive_time > max_inactive_time:
-            print('Inactive time:', inactive_time)
+            print("Inactive time:", inactive_time)
             inactive_time += loop_interval
             return False
-        
+
         inactive_time += loop_interval
         return True
     else:
@@ -70,9 +64,10 @@ def validate_window(window):
 
 def write_windows_list_to_csv(windows_list):
     today = datetime.now()
-    file_name = f"{today.date()}.csv"
+    file_name = f"logs/{today.date()}.csv"
 
     if validate_file(file_name):
+        ic(windows_list)
         try:
             with open(file_name, mode="a", newline="") as csv_file:
                 csv_writer = csv.writer(csv_file)
@@ -89,7 +84,6 @@ def validate_file(file_name):
         if not os.path.exists(file_name):
             with open(file_name, mode="w", newline="") as file_csv:
                 csv_writer = csv.writer(file_csv)
-                # Escreva a nova linha no arquivo CSV
                 csv_writer.writerow(["total_time", "app_name"])
 
         return True

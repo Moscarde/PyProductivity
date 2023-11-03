@@ -8,21 +8,23 @@
 
 >The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports. The script can help you analyze where you are wasting time and increase your productivity by focusing on the right applications.
 
+> [Versão em Português](readme_ptbr.md)
+
 ## Planned Features
 
-~~- [x] Convert old data to csv~~
+~~- [x] Convert old data to .csv~~
 
 ~~- [x] Read data in csv~~ # Algorithm changes
 
 - [x] Write data in csv
 
-- [ ] Create interface with tkinter
+- [ ] Interface with tkinter
 
 - [ ] Manipulate data with pandas
 
 - [ ] Create processed reports 
 
-- [ ] Time goals with real-time visualization
+- [ ] Time goals with real-time progress visualization
 
 - [ ] Limit app usage time by app name 
 
@@ -36,7 +38,7 @@
 
 # Prerequisites 📋
 
-Before using the App Uptime Tracker, make sure you have the following prerequisites:
+Before using the PyProductivity, make sure you have the following prerequisites:
 
 - Python 3.x installed on your system.
 - The required Python libraries (pyautogui, pygetwindow) installed. You can install them using pip:
@@ -61,7 +63,7 @@ pip install pyautogui pygetwindow
 
 5. You can stop the script at any time by pressing Ctrl + C in the terminal or closing it.
 
-6. Daily usage reports are automatically generated and saved as csv files with the format "YYYY-MM-DD.csv" in the same directory as the script.
+6. Daily usage reports are automatically generated and saved as csv files with the format "YYYY-MM-DD.csv" in `logs` folder.
 
 ## Example Output 📊
 

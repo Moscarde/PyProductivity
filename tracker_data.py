@@ -6,7 +6,6 @@ import csv
 
 import pyautogui
 import pygetwindow as gw
-from icecream import ic
 import pandas as pd
 
 # new config
@@ -66,7 +65,7 @@ def write_windows_list_to_csv(windows_list):
     file_name = f"logs/{today.date()}.csv"
 
     if validate_file(file_name):
-        ic(windows_list)
+        print(windows_list)
         try:
             with open(file_name, mode="a", newline="") as csv_file:
                 csv_writer = csv.writer(csv_file)
@@ -83,7 +82,7 @@ def validate_file(file_name):
         if not os.path.exists(file_name):
             with open(file_name, mode="w", newline="") as file_csv:
                 csv_writer = csv.writer(file_csv)
-                csv_writer.writerow(["total_time", "app_name", "minutes_away"])
+                csv_writer.writerow(["timestamp", "app_name", "minutes_away"])
 
         return True
     except Exception as e:

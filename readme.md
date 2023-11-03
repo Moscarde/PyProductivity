@@ -4,21 +4,25 @@
 
 <center>⚠ In production ⚠</center>
 
-The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports.
+>The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports. The script can help you analyze where you are wasting time and increase your productivity by focusing on the right applications.
 
 ## Planned Features
 
-[x] Convert old data to csv
+~~- [x] Convert old data to csv~~
 
-[x] Read data in csv
+~~- [x] Read data in csv~~ # Algorithm changes
 
-[x] Write data in csv
+- [x] Write data in csv
 
-[ ] Create interface with tkinter
+- [ ] Create interface with tkinter
 
-[ ] Manipulate data with pandas
+- [ ] Manipulate data with pandas
 
-[ ] Create processed reports 
+- [ ] Create processed reports 
+
+- [ ] Time goals with real-time visualization
+
+- [ ] Limit app usage time by app name 
 
 ## Features 🌟
 

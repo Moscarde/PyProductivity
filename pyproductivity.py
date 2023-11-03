@@ -10,7 +10,7 @@ import pandas as pd
 
 # new config
 loop_interval = 0.1
-write_data_interval = 3
+write_data_interval = 15
 
 
 def main():
@@ -48,8 +48,8 @@ def time_away():
         previous_mouse_pos = mouse_pos
         inactive_time = 0
 
-    print('inactive_time', inactive_time)
-    print('max_inactive_time', max_inactive_time)
+    print("inactive_time", inactive_time)
+    print("max_inactive_time", max_inactive_time)
     print(inactive_time // max_inactive_time)
     return inactive_time // max_inactive_time
 
@@ -67,11 +67,13 @@ def write_windows_list_to_csv(windows_list):
     if validate_file(file_name):
         print(windows_list)
         try:
-            with open(file_name, mode="a", newline="") as csv_file:
+            with open(file_name, mode="a", newline="", encoding="UTF-8") as csv_file:
                 csv_writer = csv.writer(csv_file)
 
                 for window in windows_list:
-                    csv_writer.writerow([str(today).split(".")[0], window, minutes_away])
+                    csv_writer.writerow(
+                        [str(today).split(".")[0], window, minutes_away]
+                    )
 
         except Exception as e:
             print(e)
@@ -80,7 +82,7 @@ def write_windows_list_to_csv(windows_list):
 def validate_file(file_name):
     try:
         if not os.path.exists(file_name):
-            with open(file_name, mode="w", newline="") as file_csv:
+            with open(file_name, mode="w", newline="", encoding="UTF-8") as file_csv:
                 csv_writer = csv.writer(file_csv)
                 csv_writer.writerow(["timestamp", "app_name", "minutes_away"])
 

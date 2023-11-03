@@ -22,7 +22,7 @@ def main():
 
             for _ in range(int(write_data_interval / loop_interval)):
                 active_window = gw.getActiveWindowTitle()
-                if user_is_active() and validate_window(active_window):
+                if window_is_valid(active_window):
                     if not active_window in windows_list:
                         windows_list.append(active_window)
 
@@ -34,36 +34,35 @@ def main():
             print(e)
 
 
-max_inactive_time = 600
+max_inactive_time = 60
 inactive_time = 0
 previous_mouse_pos = [0, 0]
 
 
-def user_is_active():
+def time_away():
     global previous_mouse_pos, inactive_time
     mouse_pos = list(pyautogui.position())
 
     if mouse_pos == previous_mouse_pos:
-        if inactive_time > max_inactive_time:
-            print("Inactive time:", inactive_time)
-            inactive_time += loop_interval
-            return False
-
-        inactive_time += loop_interval
-        return True
+        inactive_time += write_data_interval
     else:
         previous_mouse_pos = mouse_pos
         inactive_time = 0
-        return True
+
+    print('inactive_time', inactive_time)
+    print('max_inactive_time', max_inactive_time)
+    print(inactive_time // max_inactive_time)
+    return inactive_time // max_inactive_time
 
 
-def validate_window(window):
+def window_is_valid(window):
     if window != None and window != "":
         return True
 
 
 def write_windows_list_to_csv(windows_list):
     today = datetime.now()
+    minutes_away = time_away()
     file_name = f"logs/{today.date()}.csv"
 
     if validate_file(file_name):
@@ -73,7 +72,7 @@ def write_windows_list_to_csv(windows_list):
                 csv_writer = csv.writer(csv_file)
 
                 for window in windows_list:
-                    csv_writer.writerow([str(today).split(".")[0], window])
+                    csv_writer.writerow([str(today).split(".")[0], window, minutes_away])
 
         except Exception as e:
             print(e)
@@ -84,7 +83,7 @@ def validate_file(file_name):
         if not os.path.exists(file_name):
             with open(file_name, mode="w", newline="") as file_csv:
                 csv_writer = csv.writer(file_csv)
-                csv_writer.writerow(["total_time", "app_name"])
+                csv_writer.writerow(["total_time", "app_name", "minutes_away"])
 
         return True
     except Exception as e:

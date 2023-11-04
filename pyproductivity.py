@@ -1,12 +1,7 @@
-import json
-import os
+import csv, os, time, pyautogui
 import time
-from datetime import datetime, timedelta
-import csv
-
-import pyautogui
+from datetime import datetime
 import pygetwindow as gw
-import pandas as pd
 
 # new config
 loop_interval = 0.1
@@ -48,9 +43,6 @@ def time_away():
         previous_mouse_pos = mouse_pos
         inactive_time = 0
 
-    print("inactive_time", inactive_time)
-    print("max_inactive_time", max_inactive_time)
-    print(inactive_time // max_inactive_time)
     return inactive_time // max_inactive_time
 
 

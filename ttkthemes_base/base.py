@@ -1,23 +1,35 @@
 from tkinter import *
 from tkinter import ttk
+
 from commands import open_output_folder
 from ttkthemes import ThemedTk
 
 
+# functions
 def open_analysis_window():
     analysis_window = Toplevel()
     analysis_window.title("janela nova")
     analysis_window.geometry("800x600")
+
+    # ui items
     label_nome = ttk.Label(analysis_window, text="Nome")
     label_nome.grid(row=0, column=0)
+    
+    select_box = ttk.Combobox(analysis_window, values=[" 1 ", " 2 "], textvariable="11")
+    select_box.place(relx=0.5, rely=0.05, anchor=CENTER)
+    
     botao_voltar = ttk.Button(
         analysis_window, text="Fechar janela", command=analysis_window.destroy
     )
     botao_voltar.grid(row=1, column=0)
 
 
+# instancy
 root = ThemedTk(theme="scidpurple")  # yaru
 root.geometry("300x400")
+
+# ui items
+
 
 start_script_button = ttk.Button(root, text="Start Script")
 start_script_button.place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -32,4 +44,5 @@ data_analysis_button = ttk.Button(
 )
 data_analysis_button.place(relx=0.5, rely=0.6, anchor=CENTER)
 
+# loop
 root.mainloop()

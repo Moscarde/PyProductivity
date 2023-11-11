@@ -1,87 +1,87 @@
-import csv, os, time, pyautogui
-import time
-from datetime import datetime
-import pygetwindow as gw
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog
+from PIL import ImageTk, Image
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import pandas as pd
+import os
+from modules.report import get_df_report
+from modules.tracker import start_tracker
 
-# new config
-loop_interval = 0.1
-write_data_interval = 15
+root = tk.Tk()
+root.title("Grafic Plot")
+root.geometry("200x400")
+csv_list = []
 
+def open_analysis_window():
+    analysis_window = tk.Toplevel()
+    analysis_window.title('janela nova')
+    analysis_window.geometry("1000x600")
 
-def main():
-    print("Starting Tracker -  Press Ctrl + C or close this window to stop tracking!")
-    while True:
-        try:
-            windows_list = []
+    my_button2 = tk.Button(analysis_window, text="Mostrar csvs", command=show_csvs_paths())
+    my_button2.pack()
 
-            for _ in range(int(write_data_interval / loop_interval)):
-                active_window = gw.getActiveWindowTitle()
-                if window_is_valid(active_window):
-                    if not active_window in windows_list:
-                        windows_list.append(active_window)
+    # Label Frame Para o Grafico
+    labelframe = tk.LabelFrame(analysis_window, text="Tempo de uso do dia")
+    labelframe.pack(fill="both", expand="yes")
 
-                time.sleep(loop_interval)
+    def plot_graph(event, labelframe = labelframe):
+        # processa o arquivo csv
+        filename = event.widget.get()
+        csv_path = f"{os.getcwd()}\logs\{filename}"
+        df = get_df_report(csv_path)
 
-            write_windows_list_to_csv(windows_list)
+        # Cria uma figura Matplotlib
+        fig, ax = plt.subplots()
+        ax.bar(df["app_name"].head(5), df["daily_usage"].head(5))
 
-        except Exception as e:
-            print(e)
+        # Limpa os itens dentro do labelframe
+        clear_label_frame(labelframe)
 
-
-max_inactive_time = 60
-inactive_time = 0
-previous_mouse_pos = [0, 0]
-
-
-def time_away():
-    global previous_mouse_pos, inactive_time
-    mouse_pos = list(pyautogui.position())
-
-    if mouse_pos == previous_mouse_pos:
-        inactive_time += write_data_interval
-    else:
-        previous_mouse_pos = mouse_pos
-        inactive_time = 0
-
-    return inactive_time // max_inactive_time
-
-
-def window_is_valid(window):
-    if window != None and window != "":
-        return True
-
-
-def write_windows_list_to_csv(windows_list):
-    today = datetime.now()
-    minutes_away = time_away()
-    file_name = f"logs/{today.date()}.csv"
-
-    if validate_file(file_name):
-        print(windows_list)
-        try:
-            with open(file_name, mode="a", newline="", encoding="UTF-8") as csv_file:
-                csv_writer = csv.writer(csv_file)
-
-                for window in windows_list:
-                    csv_writer.writerow(
-                        [str(today).split(".")[0], window, minutes_away]
-                    )
-
-        except Exception as e:
-            print(e)
+        # Adiciona o gráfico à janela Tkinter
+        canvas = FigureCanvasTkAgg(fig, master=labelframe)
+        canvas_widget = canvas.get_tk_widget()
+        canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    
+    # Select csv
+    select_csv = ttk.Combobox(analysis_window, values=csv_list)
+    select_csv.set("Pick an Option")
+    select_csv.pack(padx=5, pady=5)
+    select_csv.current()
+    select_csv.bind("<<ComboboxSelected>>", plot_graph)
 
 
-def validate_file(file_name):
-    try:
-        if not os.path.exists(file_name):
-            with open(file_name, mode="w", newline="", encoding="UTF-8") as file_csv:
-                csv_writer = csv.writer(file_csv)
-                csv_writer.writerow(["timestamp", "app_name", "minutes_away"])
-
-        return True
-    except Exception as e:
-        print(e)
+def clear_label_frame(labelframe):
+    # Limpa todos os widgets dentro do Labelframe
+    for widget in labelframe.winfo_children():
+        widget.destroy()
 
 
-if __name__ == "__main__":
-    main()
+def show_csvs_paths():
+    # retorna a lista de arquivos csv
+    global csv_list
+    files = os.listdir("logs/")
+    csv_files = [file for file in files if file.endswith(".csv")]
+    csv_list = csv_files
+
+
+# TkInter Elementos
+# Botao Mostrar graficos
+
+# Botao Mostrar csvs
+start_tracker_button = ttk.Button(root, text="Iniciar Monitoramento", command=start_tracker)
+start_tracker_button.pack()
+
+analysis_button = ttk.Button(root, text="Analisar relatórios", command=open_analysis_window)
+analysis_button.pack()
+
+def on_close():
+    root.quit()
+    root.destroy()
+
+
+root.protocol("WM_DELETE_WINDOW", on_close)
+
+root.mainloop()

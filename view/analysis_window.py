@@ -63,4 +63,5 @@ def load_csvs_paths():
     global csv_list
     files = os.listdir("logs/")
     csv_files = [file for file in files if file.endswith(".csv")]
-    csv_list = csv_files
+    return csv_files
+    

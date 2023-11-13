@@ -11,11 +11,26 @@ from PIL import Image, ImageTk
 from modules.report import get_df_report
 from modules.tracker import start_tracker
 from view.analysis_window import open_analysis_window
+import subprocess
+import win32gui, win32con
+import shutil
 
 root = tk.Tk()
 root.title("Grafic Plot")
 root.geometry("275x205")
 root.configure(bg="#E6E6FA")
+
+# hide main console
+# hide = win32gui.GetForegroundWindow()
+# win32gui.ShowWindow(hide , win32con.SW_HIDE)
+def add_to_startup():
+    origin_path = 'modules/tracker.py'
+    path = 'C:\\Users\\Gabriel\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\tracker.py'
+    shutil.copy2(origin_path, path)
+
+
+def open_script():
+    subprocess.Popen(['start', 'cmd', '/k', 'python', 'modules/tracker.py'], shell=True)
 
 
 # TkInter Elementos
@@ -29,7 +44,8 @@ label.place(x=10, y=10)
 start_tracker_button = tk.Button(
     root,
     text="Iniciar Monitoramento",
-    command=start_tracker,
+    command=open_script,
+    # command=start_tracker,
     width=35,
     background="#cbc3e3",
     activebackground="#603ffe",
@@ -46,6 +62,16 @@ analysis_button = tk.Button(
     activebackground="#603ffe",
 )
 analysis_button.place(x=10, y=150)
+
+add_to_startup_button = tk.Button(
+    root,
+    text="Teste terminal",
+    command=add_to_startup,
+    width=35,
+    background="#cbc3e3",
+    activebackground="#603ffe",
+)
+add_to_startup_button.place(x=10, y=180)
 
 
 def on_close():

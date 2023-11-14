@@ -7,7 +7,7 @@ from tkinter import filedialog, messagebox, ttk
 import matplotlib.cbook as cbook
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-import seaborn as sns
+import numpy as np
 import win32con
 import win32gui
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -55,7 +55,7 @@ class MainInterface:
         )
 
         self.button_open_analysis_window = self.create_button(
-            "Analisar relatórios", command=self.open_analysis_window, x=10, y=150
+            "Analisar relatórios", command=self.open_analysis_window, x=10, y=145
         )
 
         self.button_add_to_startup = self.create_button(
@@ -94,47 +94,83 @@ class Graph:
         self.parent_frame = parent_frame
         self.fig, self.ax = plt.subplots()
 
-        self.image_path = cbook.get_sample_data(os.path.join(os.getcwd(), "pictures", "bg_graph2.jpg"))
+        self.image_path = cbook.get_sample_data(
+            os.path.join(os.getcwd(), "pictures", "bg_graph2.jpg")
+        )
 
         self.img = plt.imread(self.image_path)
         self.fig.set_facecolor(Constants.BG_COLOR)
-        self.ax.imshow(self.img, extent=[-1, 5, 0, 6], aspect="auto")
+        # self.ax.imshow(self.img, extent=[-1, 5, 0, 6], aspect="auto")
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.parent_frame)
         self.canvas_widget = self.canvas.get_tk_widget()
         self.canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
     def update_graph(self, df, options):
+        self.df = df.head(options["qtd_apps"])
+        self.y_lim = self.df["daily_usage_seconds"].max()
+        if self.y_lim > 600:
+            self.y_lim = self.y_lim * 1.15
+        else:
+            self.y_lim = 900
+
+        self.setup_axes(options)
+        self.plot_background_image(options)
+        self.bars = self.plot_bars(self.df)
+        self.configure_y_ticks(self.df["daily_usage_seconds"].max())
+        self.add_value_labels(self.bars)
+        self.canvas.draw()
+
+    def setup_axes(self, options):
         self.ax.clear()
-
-        self.y_lim = df["daily_usage"].max() + 1
-        self.x_lim = options["qtd_apps"]
-        self.ax.imshow(self.img, extent=[-1, self.x_lim, 0, self.y_lim], aspect="auto")
-
         self.ax.set_title(options["Date"])
         self.ax.set_ylabel("Horas")
         self.ax.set_xlabel("Programas")
 
-        self.bars = self.ax.bar(
-            df["app_name"].head(options["qtd_apps"]),
-            df["daily_usage"].head(options["qtd_apps"]),
-            color=Constants.BUTTON_ACTIVE_COLOR,
+    def plot_background_image(self, options):
+        self.ax.imshow(
+            self.img, extent=[-0.7, options["qtd_apps"], 0, self.y_lim], aspect="auto"
         )
 
-        self.ax.grid(options["grid_enables"])
-        for bar in self.bars:
+    def plot_bars(self, df):
+        bars = self.ax.bar(
+            df["app_name"],
+            df["daily_usage_seconds"],
+            color=Constants.BUTTON_ACTIVE_COLOR,
+        )
+        return bars
+
+    def configure_y_ticks(self, max_value):
+        self.ax.yaxis.set_major_formatter(ticker.FuncFormatter(self.format_hours))
+
+        rounded_max_value = np.ceil(max_value / 900) * 900
+        num_ticks = 5
+        tick_interval = rounded_max_value / (num_ticks - 1)
+        desired_ticks = [i * tick_interval for i in range(num_ticks)]
+        self.ax.set_yticks(desired_ticks)
+
+    def add_value_labels(self, bars):
+        for bar in bars:
             yval = bar.get_height()
             self.ax.text(
                 bar.get_x() + bar.get_width() / 2,
                 yval,
-                round(yval, 2),
+                self.format_hours(yval, 0),
                 ha="center",
                 va="bottom",
                 color="black",
                 fontsize=9,
             )
 
-        self.canvas.draw()
+    def format_hours(self, x, _):
+        hours = int(x // 3600)
+        minutes = int((x % 3600) // 60)
+        if hours == 0:
+            return f"{minutes:02d}m"
+        elif minutes == 0:
+            return f"{hours:02d}h"
+        else:
+            return f"{hours:02d}h {minutes:02d}m"
 
 
 class AnalysisInterface:

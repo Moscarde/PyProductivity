@@ -1,7 +1,9 @@
+import datetime
 import os
 import shutil
 import subprocess
 import tkinter as tk
+import webbrowser
 from tkinter import filedialog, messagebox, ttk
 
 import matplotlib.cbook as cbook
@@ -12,7 +14,6 @@ import win32con
 import win32gui
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
-import webbrowser
 
 from modules.report import get_df_report
 from view.analysis_window import load_csvs_paths, open_analysis_window
@@ -47,7 +48,8 @@ class Menu:
     def open_logs_folder():
         path = os.path.join(os.getcwd(), "logs")
         webbrowser.open(path)
-    
+
+    @staticmethod
     def open_startup_folder():
         username = os.getenv("USERNAME")
         path = f"C:\\Users\\{username}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
@@ -141,7 +143,7 @@ class Graph:
         self.fig, self.ax = plt.subplots()
 
         self.image_path = cbook.get_sample_data(
-            os.path.join(os.getcwd(), "pictures", "bg_graph2.jpg")
+            os.path.join(os.getcwd(), "pictures", "bg_graph.jpg")
         )
 
         self.img = plt.imread(self.image_path)
@@ -164,14 +166,29 @@ class Graph:
         self.plot_background_image(options)
         self.bars = self.plot_bars(self.df)
         self.configure_y_ticks(self.df["daily_usage_seconds"].max())
+        self.configure_x_ticks()
         self.add_value_labels(self.bars)
         self.canvas.draw()
 
     def setup_axes(self, options):
         self.ax.clear()
-        self.ax.set_title(options["Date"])
-        self.ax.set_ylabel("Horas")
-        self.ax.set_xlabel("Programas")
+        self.ax.set_title(self.parse_date(options["Date"]))
+        self.ax.set_ylabel("Tempo de Uso", fontsize=16)
+        self.ax.set_xlabel("Programas", fontsize=16)
+
+    def parse_date(self, date):
+        weekday_list_pt_br = [
+            "Segunda-feira",
+            "Terça-feira",
+            "Quarta-feira",
+            "Quinta-feira",
+            "Sexta-feira",
+            "Sábado",
+            "Domingo",
+        ]
+        datetime_obj = datetime.datetime.strptime(date.split(".")[0], "%Y-%m-%d")
+        weekday = weekday_list_pt_br[datetime_obj.weekday()]
+        return f'{weekday} - {datetime_obj.strftime(f"%d/%m/%Y")}'
 
     def plot_background_image(self, options):
         self.ax.imshow(
@@ -194,6 +211,20 @@ class Graph:
         tick_interval = rounded_max_value / (num_ticks - 1)
         desired_ticks = [i * tick_interval for i in range(num_ticks)]
         self.ax.set_yticks(desired_ticks)
+
+    def configure_x_ticks(self):
+        formated_labels = [
+            self.limit_text(label.get_text()) for label in self.ax.get_xticklabels()
+        ]
+        self.ax.set_xticks(self.ax.get_xticks())
+        self.ax.set_xticklabels(formated_labels)
+
+    def limit_text(self, text):
+        max_length = 18
+        if len(text) > max_length:
+            return text[: max_length - 3] + "..."
+        else:
+            return text
 
     def add_value_labels(self, bars):
         for bar in bars:

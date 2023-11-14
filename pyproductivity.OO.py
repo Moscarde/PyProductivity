@@ -16,7 +16,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import Image, ImageTk
 
 from modules.report import get_df_report
-from view.analysis_window import load_csvs_paths, open_analysis_window
 
 
 class Constants:
@@ -41,6 +40,12 @@ class FileHandler:
             messagebox.showinfo("Caminho", path)
         except Exception as error:
             messagebox.showerror("Erro ao adicionar ao início automático!", error)
+
+    @staticmethod
+    def load_logs_filenames():
+        files = os.listdir("logs/")
+        csv_files = [file for file in files if file.endswith(".csv")]
+        return csv_files
 
 
 class Menu:
@@ -256,7 +261,7 @@ class AnalysisInterface:
         self.analysis_interface = tk.Toplevel(root)
         self.configure_interface()
 
-        self.csv_list = load_csvs_paths()
+        self.csv_list = FileHandler.load_logs_filenames()
 
         self.combo_csv = ttk.Combobox(
             self.analysis_interface, values=self.csv_list, width=35

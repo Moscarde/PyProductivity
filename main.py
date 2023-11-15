@@ -1,6 +1,4 @@
 import tkinter as tk
-import win32con
-import win32gui
 from view.main_interface import MainInterface
 
 

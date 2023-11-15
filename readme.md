@@ -103,10 +103,10 @@ This repository readme was inspired in readme template from [repo-full-readme](h
 
 <div align="left">
   <a href="https://linkedin.com/in/moscarde" target="_blank">
-    <img src="https://img.shields.io/badge/-LinkedIn-333333?style=flat&logo=linkedin&logoColor=0072b1" alt="Linkedin logo"  />
+    <img src="https://img.shields.io/badge/-LinkedIn-333333?style=flat&logo=linkedin&logoColor=0072b1" alt="Linkedin logo" height="40" />
   </a>
   <a href="https://github.com/moscarde" target="_blank">
-    <img src="https://img.shields.io/badge/-Github-333333?style=flat&logo=github&logoColor=00000"  alt="Linkedin logo"  />
+    <img src="https://img.shields.io/badge/-Github-333333?style=flat&logo=github&logoColor=00000"  alt="Linkedin logo" height="40"  />
   </a>
     
   

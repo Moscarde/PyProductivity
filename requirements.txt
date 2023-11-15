@@ -1,5 +1,6 @@
 pandas
 pyautogui
+pygetwindow
 matplotlib
 numpy
 pywin32

@@ -7,7 +7,7 @@ __Você pode ver esse projeto bem  [Aqui](https://www.seuSite.com.br)__
 
 🖥️ Pagina 1 Home                                        | 🖥️ Versão 2 Sobre                                        | 🖥️ Pagina 3 Serviços   
 :----------:                                            | :--------------:                                        | :--------------: 
-<a href="#"><img src="pictures/screenshots/main_interface_screenshot.jpg" /></a> <img src="pictures/screenshots/main_interface_menu_screenshot.jpg" />   | <img src="pictures/screenshots/console_screenshot.jpg" />   | <img src="pictures/screenshots/analysis_interface_screenshot.jpg" /> 
+<img src="../pictures/screenshots/main_interface_screenshot.jpg" /> <img src="../pictures/screenshots/main_interface_menu_screenshot.jpg" />   | <img src="../pictures/screenshots/console_screenshot.jpg" />   | <img src="../pictures/screenshots/analysis_interface_screenshot.jpg" /> 
 
 ## ⚙️ Funcionalidades
 

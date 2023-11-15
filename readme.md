@@ -30,14 +30,20 @@ The script is an application uptime tracker that monitors active windows and rec
 ## ⬇️ Usage
 
 1. Clone or download the repository to your local machine.
+
 2. Open a terminal or command prompt and navigate to the directory where the script is located.
+
 3. Run the script using the following command:
+
 4. Se precisar inserir um bloco de código
+
 ```shell
  python main.py
 ```
 or 
+
 4. Execute __exec_main.bat__ file in the same directory
+
 5. In the main interface you can chose which function you want to execute
     - Start tracking script
     - Open analysis inteface
@@ -54,7 +60,8 @@ Before using the PyProductivity, make sure you have the following prerequisites:
 pip install -r requirements.txt
 ```
 or
-Execute __update_libs.bat__ file in the same directory
+
+- Execute __update_libs.bat__ file in the same directory
 
 ## Example csv logs and analysis interface 📊
 

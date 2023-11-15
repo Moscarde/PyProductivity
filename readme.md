@@ -65,7 +65,7 @@ or
 
 ## Example csv logs and analysis interface 📊
 
-<img src="pictures/screenshots/analysis_interface_screenshot.jpg" /> <img src="pictures/screenshots/analysis_interface_screenshot2.jpg" />
+<img src="pictures/screenshots/analysis_interface_screenshot.jpg" width="49%"/> <img src="pictures/screenshots/analysis_interface_screenshot_2.jpg" width="49%" />
 
 ```csv
 

@@ -1,9 +1,8 @@
 <p align="center">
     <a href="#"><img src="pictures/header.jpg" alt="Logo" width=80%/></a>
 </p>
-<p align="center">
-    ⚙️ Work in Progress ⚙️
-</p>
+
+
 PyProductivity é um script que monitora o tempo de uso de aplicações e salva o tempo gasto em cada uma, automaticamente, gerando reports de usos diários. O script pode te ajudar a analizar onde está perdendo mais tempo podendo focar nas aplicações corretas.
 
 🖥️ Interface principal                                        | 🖥️ Console do monitorador                                        | 🖥️ Interface de análise   

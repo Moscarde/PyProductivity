@@ -1,9 +1,8 @@
 <p align="center">
     <a href="#"><img src="pictures/header.jpg" alt="Logo" width=80%/></a>
 </p>
-<p align="center">
-    ⚙️ Work in Progress ⚙️
-</p>
+
+
 The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports. The script can help you analyze where you are wasting time and increase your productivity by focusing on the right applications.
 
 > [Versão em Português](readme_ptbr.md)

@@ -5,7 +5,7 @@ from win32com.client import Dispatch
 class FileHandler:
     @staticmethod
     def copy_to_startup():
-        origin_path = "scripts/tracker.py"
+        origin_path = "scripts/exec_tracker.bat"
 
         try:
             username = os.getenv("USERNAME")

@@ -1,15 +1,20 @@
-import csv, os, time, pyautogui
+import csv, os, time, pyautogui, sys
 import time
 from datetime import datetime
 import pygetwindow as gw
+import win32gui
+import win32console
 
-# new config
 loop_interval = 0.1
 write_data_interval = 15
 
 
 def start_tracker():
-    print("Starting Tracker -  Press Ctrl + C or close this window to stop tracking!")
+    actual_dir = os.path.dirname(os.path.realpath(__file__))
+    par_dir = os.path.abspath(os.path.join(actual_dir, os.pardir))
+
+    show_startup_message(par_dir)
+
     while True:
         try:
             windows_list = []
@@ -22,10 +27,33 @@ def start_tracker():
 
                 time.sleep(loop_interval)
 
-            write_windows_list_to_csv(windows_list)
+            write_windows_list_to_csv(windows_list, par_dir)
 
         except Exception as e:
             print(e)
+
+
+def show_startup_message(par_dir):
+    print(
+        """
+      _ \       _ \             |             |   _)      _)  |        
+      __/ |  |  __/ _| _ \   _` |  |  |   _|   _|  | \ \ / |   _|  |  |
+     _|  \_, | _| _| \___/ \__,_| \_,_| \__| \__| _|  \_/ _| \__| \_, |
+         ___/                                                     ___/ 
+
+"""
+    )
+    print(
+        "________________ PyProductivity - App Tracker - Configuration ________________"
+    )
+
+    print("_____ Output folder: " + os.path.join(par_dir, "logs"))
+    print(f"_____ Windows detection interval: {loop_interval}")
+    print(f"_____ Writing data interval: {write_data_interval}")
+    print(".")
+    print('tip* - To start track without console window, execute "scripts/exec_tracker_hidden.bat" or command "python tracker.py --hidden"')
+    print(".")
+    print("Starting Tracker -  Press Ctrl + C or close this window to stop tracking!")
 
 
 max_inactive_time = 60
@@ -51,10 +79,10 @@ def window_is_valid(window):
         return True
 
 
-def write_windows_list_to_csv(windows_list):
+def write_windows_list_to_csv(windows_list, par_dir):
     today = datetime.now()
     minutes_away = time_away()
-    file_name = f"logs/{today.date()}.csv"
+    file_name = os.path.join(par_dir, "logs", f"{today.date()}.csv")
 
     if validate_file(file_name):
         print(windows_list)
@@ -84,4 +112,9 @@ def validate_file(file_name):
 
 
 if __name__ == "__main__":
+    args = sys.argv
+    if "--hidden" in args:
+        window = win32console.GetConsoleWindow()
+        win32gui.ShowWindow(window, 0)
+
     start_tracker()

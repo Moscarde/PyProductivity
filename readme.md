@@ -1,116 +1,106 @@
-# 💡 Nome da Aplicação
+<p align="center">
+    <a href="#"><img src="pictures/header.jpg" alt="Logo" width=80%/></a>
+</p>
+<p align="center">
+    ⚙️ Work in Progress ⚙️
+</p>
+The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports. The script can help you analyze where you are wasting time and increase your productivity by focusing on the right applications.
 
-Uma breve descrição do que se trata do seu projeto e o que ele faz e o link caso disponível para acessar em produção.
-
-__Você pode ver esse projeto bem  [Aqui](https://www.seuSite.com.br)__
-
-
-🖥️ Pagina 1 Home                                        | 🖥️ Versão 2 Sobre                                        | 🖥️ Pagina 3 Serviços   
+🖥️ Main interface                                        | 🖥️ Tracker console                                        | 🖥️ Analysis Interface   
 :----------:                                            | :--------------:                                        | :--------------: 
 <img src="pictures/screenshots/main_interface_screenshot.jpg" /> <img src="pictures/screenshots/main_interface_menu_screenshot.jpg" />   | <img src="pictures/screenshots/console_screenshot.jpg" />   | <img src="pictures/screenshots/analysis_interface_screenshot.jpg" /> 
 
-## ⚙️ Funcionalidades
+## ⚙️ Features
 
-- ✅ Coloque em topicos
-- ☑️ as funcionalidades
-- ✅ que destacam seu projeto
-- ☑️ exemplo:
-- ✅ Design Responsivo
-- ☑️ Animação com SVG
-- ✅ Micro interações com Vanilla JS
-- ☑️ Componentização com Vanilla JS
-- ✅ Consumo de API do YouTube
-- ☑️ HTML semântico
+- ✅ Monitor and record the uptime of active windows
+- ✅ Detect Inactivity
+- ✅ Log data to csv file
+- ☑️ Read date reports and plot total usage time graphs
 
-## 🧰 Bibliotecas
+## 🧰 Libs
 
-- ✅ Coloque em topicos
-- ☑️ as bibliotecas ou
-- ✅ as dependências
-- ☑️ do seu projeto,
-- ✅ a frente do nome indique
-- ☑️ onde aquela lib foi usada.
-- ✅ exemplo:
-- ☑️ Rect Router: cria rotas para um SPA
+- ✅ __pygetwindow__: Identifies the active window title
+- ✅ __pyautogui__: Helps identify inactivity
+- ✅ __matplotlib__: Plots graphs
+- ✅ __pandas__: Analyses data
+- ✅ __numpy__: Assists in data management
+- ✅ __pywin32__: Allow hiding the console (optional)
 
-## ⬇️ Rodando o projeto
 
-1. Ensine passo a passo.
-2. Como alguem que não domina a sua área
-3. Pode rodar esse projeto localmente
+## ⬇️ Usage
+
+1. Clone or download the repository to your local machine.
+2. Open a terminal or command prompt and navigate to the directory where the script is located.
+3. Run the script using the following command:
 4. Se precisar inserir um bloco de código
-5. ```
-    Aqui é um bloco de código
-    ```
-6. Você também pode inserir uma única linha de código
-7. > Uma linha de código.
+```shell
+ python main.py
+```
+or 
+4. Execute __exec_main.bat__ file in the same directory
+5. In the main interface you can chose which function you want to execute
+    - Start tracking script
+    - Open analysis inteface
+    - Install tracking script in system startup
 
-## 🧩 Tecnologías Utilizadas
+# 📋 Prerequisites 
+
+Before using the PyProductivity, make sure you have the following prerequisites:
+
+- Python 3.x installed on your system.
+- The required Python libraries installed. You can install them using pip:
+
+``` shell
+pip install -r requirements.txt
+```
+or
+Execute __update_libs.bat__ file in the same directory
+
+## Example csv logs and analysis interface 📊
+
+<img src="pictures/screenshots/analysis_interface_screenshot.jpg" /> <img src="pictures/screenshots/analysis_interface_screenshot2.jpg" />
+
+```csv
+
+timestamp,app_name,minutes_away
+2023-11-03 16:08:04,Windows PowerShell,0
+2023-11-03 16:08:08,Windows PowerShell,0
+2023-11-03 16:08:08,tracker_data.py - PyWindows - Visual Studio Code,0
+2023-11-03 16:08:08,Visual Studio Code,0
+
+```
+
+The report comprises the timestamp, window name of an application, and the duration of inactivity in minutes (which can be used for data analysis and filtering).
+
+
+## ⌛ Development progress
+
+- [x] Monitor and record the uptime of active windows
+- [x] Detect Inactivity
+- [x] Log data to csv file
+- [x] Read date reports and plot total usage time graphs
+- [x] Read date reports and plot total usage time graphs
+- [ ] More insightful graphs
+- [ ] Time goals with real-time progress visualization
+- [ ] Limit app daily usage time by app name
+
+And maybe something more
+
+
+## 🙏 Special thanks
+
+This repository readme was inspired in readme template from [repo-full-readme](https://github.com/Dener-Garcia/repo-full-readme/) by [Dener Garcia](https://github.com/Dener-Garcia)
+
+
+## 💬 Lets connect?
 
 <div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
-  <img width="24" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" alt="html5 logo"  />
-  <img width="24" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" height="40" alt="sass logo"  />
-  <img width="24" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
-  <img width="24" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="nodejs logo"  />
-</div>
-
-## ⌛ Status do projeto
-
-- [ ] Coloque em tópicos e marque
-- [x] As principais features
-- [x] Que já estão prontas. 
-- [ ] Deixe em branco o que esta faltando
-
-## 💸 Contribua com esse projeto
-
-Caso seu projeto seja open source ou necessite de algum incentivo financeiro, explique aqui como as pessoas podem ajudar e disponibilize links para contribuições
-
-#### [Doe com PIX](https:linkPix.com.br)
-
-## 🤯 Aprendizados
-
-Escreva uma suas palavras como esse projeto agregou na sua vida, o que você aprendeu com ele, e o que mais achou interessante ao faze-lo.
-
-## 🏆 Reconhecimentos
-
-Caso seu projeto faça parte de algo que foi reconhecido em alguma matéria de blog, reportagem ou no meio estudantil coloque nesse espaço qual foi o prêmio ou reconhecimento e disponha um link para acessar a materia.
-
-## 🙏 Agradecimentos
-
-Mencione as pessoas que fizeram parte do projeto ou que te ajudaram de alguma forma, disponibilize links para as redes sociais delas ou o próprio github.
-
-__[Fulano](https://www.linkedin/in/fulano) : Designer UX/UI__
-
-__[Ciclano](https://www.linkedin/in/fulano) : Desenvolvedor Back-end__
-
-__[Beltrano](https://www.linkedin/in/fulano) : QA__
-
-
-## 💬 Vamos nos conectar?
-
-<div align="left">
-  <a href="https://" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo"  />
+  <a href="https://linkedin.com/in/moscarde" target="_blank">
+    <img src="https://img.shields.io/badge/-LinkedIn-333333?style=flat&logo=linkedin&logoColor=0072b1" alt="Linkedin logo"  />
   </a>
-    <img width="24" />
-  <a href="https://" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg" width="52" height="40" alt="youtube logo"  />
+  <a href="https://github.com/moscarde" target="_blank">
+    <img src="https://img.shields.io/badge/-Github-333333?style=flat&logo=github&logoColor=00000"  alt="Linkedin logo"  />
   </a>
-    <img width="24" />
-  <a href="https://" target="_blank">
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo"  />
-  </a>
-    <img width="24" />
-  <a href="https://" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/twitter/default.svg" width="52" height="40" alt="twitter logo"  />
-  </a>
-    <img width="24" />
-  <a href="https://" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/behance/default.svg" width="52" height="40" alt="behance logo"  />
-  </a>
+    
+  
 </div>

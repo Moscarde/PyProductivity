@@ -35,8 +35,6 @@ The script is an application uptime tracker that monitors active windows and rec
 
 3. Run the script using the following command:
 
-4. Se precisar inserir um bloco de código
-
 ```shell
  python main.py
 ```
@@ -85,7 +83,6 @@ The report comprises the timestamp, window name of an application, and the durat
 - [x] Monitor and record the uptime of active windows
 - [x] Detect Inactivity
 - [x] Log data to csv file
-- [x] Read date reports and plot total usage time graphs
 - [x] Read date reports and plot total usage time graphs
 - [ ] More insightful graphs
 - [ ] Time goals with real-time progress visualization

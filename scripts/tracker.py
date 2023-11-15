@@ -30,7 +30,10 @@ def start_tracker():
             write_windows_list_to_csv(windows_list, par_dir)
 
         except Exception as e:
-            print(e)
+            if str(e) == "name 'activeWindowTitle' is not defined":
+                pass
+            else:
+                print(e)
 
 
 def show_startup_message(par_dir):
@@ -51,7 +54,9 @@ def show_startup_message(par_dir):
     print(f"_____ Windows detection interval: {loop_interval}")
     print(f"_____ Writing data interval: {write_data_interval}")
     print(".")
-    print('tip* - To start track without console window, execute "scripts/exec_tracker_hidden.bat" or command "python tracker.py --hidden"')
+    print(
+        'tip* - To start track without console window, execute "scripts/exec_tracker_hidden.bat" or command "python tracker.py --hidden"'
+    )
     print(".")
     print("Starting Tracker -  Press Ctrl + C or close this window to stop tracking!")
 

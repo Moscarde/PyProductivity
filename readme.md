@@ -6,6 +6,8 @@
 </p>
 The script is an application uptime tracker that monitors active windows and records the time spent on specific applications, automatically generating daily usage reports. The script can help you analyze where you are wasting time and increase your productivity by focusing on the right applications.
 
+> [Versão em Português](readme_ptbr.md)
+
 🖥️ Main interface                                        | 🖥️ Tracker console                                        | 🖥️ Analysis Interface   
 :----------:                                            | :--------------:                                        | :--------------: 
 <img src="pictures/screenshots/main_interface_screenshot.jpg" /> <img src="pictures/screenshots/main_interface_menu_screenshot.jpg" />   | <img src="pictures/screenshots/console_screenshot.jpg" />   | <img src="pictures/screenshots/analysis_interface_screenshot.jpg" /> 

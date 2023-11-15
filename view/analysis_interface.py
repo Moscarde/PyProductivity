@@ -36,7 +36,7 @@ class AnalysisInterface:
             self.combo_csv.set("Nenhum relatório encontrado")
 
     def configure_interface(self):
-        self.analysis_interface.title("Segunda Interface")
+        self.analysis_interface.title("Análise de relatórios")
         self.analysis_interface.geometry("1000x600")
         self.analysis_interface.configure(bg=Constants.BG_COLOR)
 

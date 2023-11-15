@@ -71,7 +71,7 @@ class MainInterface:
 
     def open_script(self):
         subprocess.Popen(
-            ["start", "cmd", "/k", "python", "modules/tracker.py"], shell=True
+            ["start", "cmd", "/k", "python", "scripts/tracker.py"], shell=True
         )
 
     def open_analysis_window(self):

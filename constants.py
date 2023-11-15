@@ -1,0 +1,4 @@
+class Constants:
+    BG_COLOR = "#E6E6FA"
+    BUTTON_COLOR = "#CBC3E3"
+    BUTTON_ACTIVE_COLOR = "#603FFE"
